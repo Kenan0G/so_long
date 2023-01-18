@@ -6,7 +6,7 @@
 /*   By: kgezgin <kgezgin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 17:54:08 by kgezgin           #+#    #+#             */
-/*   Updated: 2023/01/02 18:12:31 by kgezgin          ###   ########.fr       */
+/*   Updated: 2023/01/17 11:32:38 by kgezgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	**get_map(char *fd_char)
 		return (NULL);
 	res = NULL;
 	str = get_next_line(fd);
-	if (ft_strlen(str) == 0)
+	if (!str)
 		return (NULL);
 	while (str)
 	{
@@ -52,7 +52,9 @@ char	**get_map(char *fd_char)
 		free(str);
 		str = get_next_line(fd);
 	}
-	map = ft_split(res, '\n');
+	if (newline_check(res) == 0)
+		return (free(res), NULL);
+	map = split_res(res);
 	free (res);
 	close(fd);
 	return (map);
@@ -60,30 +62,12 @@ char	**get_map(char *fd_char)
 
 int	check_map(t_data_box *data)
 {
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	if (!data->map->map)
+	if (!data->ma->map)
+		return (ft_printf("Error\nMap Not Valid\n"), 0);
+	if (wall_verif(data) == 0)
 		return (0);
-	while (i < data->map->y)
-	{
-		if (((int)ft_strlen(data->map->map[i]) != data->map->x)
-			|| data->map->map[i][0] != '1'
-			|| data->map->map[i][data->map->x - 1] != '1')
-			return (0);
-		i++;
-	}
-	while (data->map->map[0][j])
-	{
-		if (data->map->map[0][j] != '1' ||
-			data->map->map[data->map->y - 1][j] != '1')
-			return (0);
-		j++;
-	}
 	if (pars(data, 'P') != 1 || pars(data, 'C') < 1 || pars(data, 'E') != 1)
-		return (0);
+		return (ft_printf("Error\nItems Not OK\n"), 0);
 	return (1);
 }
 
@@ -95,20 +79,24 @@ int	nb_lines(t_data_box *data)
 
 	i = 0;
 	c = 0;
-	if (!data->map->map)
+	if (!data->ma->map)
 		return (0);
-	while (data->map->map[i])
+	while (data->ma->map[i])
 	{
 		j = 0;
-		while (data->map->map[i][j])
+		while (data->ma->map[i][j])
 		{
-			if (data->map->map[i][j] == 'C')
+			if (data->ma->map[i][j] != 'P' && data->ma->map[i][j] != 'E'
+				&& data->ma->map[i][j] != 'C' && data->ma->map[i][j] != '0'
+				&& data->ma->map[i][j] != '1')
+				data->ma->letter = 0;
+			else if (data->ma->map[i][j] == 'C')
 				c++;
 			j++;
 		}
 		i++;
 	}
-	data->map->nb_c = c;
+	data->ma->nb_c = c;
 	return (i);
 }
 
@@ -120,17 +108,17 @@ int	pars(t_data_box *data, char element)
 
 	i = 0;
 	nb_element = 0;
-	while (data->map->map[i])
+	while (data->ma->map[i])
 	{
 		j = 0;
-		while (data->map->map[i][j])
+		while (data->ma->map[i][j])
 		{
-			if (data->map->map[i][j] == element)
+			if (data->ma->map[i][j] == element)
 			{
 				if (element == 'P')
 				{
-					data->map->pos_player[0] = i;
-					data->map->pos_player[1] = j;
+					data->ma->pos_player[0] = i;
+					data->ma->pos_player[1] = j;
 				}
 				nb_element++;
 			}

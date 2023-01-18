@@ -6,7 +6,7 @@
 /*   By: kgezgin <kgezgin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 18:50:27 by kgezgin           #+#    #+#             */
-/*   Updated: 2022/12/27 19:14:38 by kgezgin          ###   ########.fr       */
+/*   Updated: 2023/01/16 17:52:01 by kgezgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <stdint.h>
 # include <unistd.h>
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 5
+#  define BUFFER_SIZE 1
 
 # endif
 

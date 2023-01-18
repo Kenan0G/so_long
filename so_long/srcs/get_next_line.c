@@ -6,7 +6,7 @@
 /*   By: kgezgin <kgezgin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 18:49:49 by kgezgin           #+#    #+#             */
-/*   Updated: 2022/12/30 14:29:30 by kgezgin          ###   ########.fr       */
+/*   Updated: 2023/01/17 10:49:54 by kgezgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ char	*ft_gnl_strjoin(char *s1, char *s2)
 	while (s2[++j])
 		str[i + j] = s2[j];
 	str[i + j] = '\0';
-	free(s1);
+	if (s1)
+		free(s1);
 	return (str);
 }
 
@@ -119,7 +120,7 @@ char	*get_next_line(int fd)
 	if (!temp)
 		return (NULL);
 	len = 1;
-	while (len && !ft_strchr_v2(gnl, '\n'))
+	while (len && (!gnl || (gnl && !ft_strchr_v2(gnl, '\n'))))
 	{
 		gnl = ft_write(len, temp, gnl, fd);
 		if (!gnl || BUFFER_SIZE > (int)ft_strlen(temp))
