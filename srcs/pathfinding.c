@@ -6,7 +6,7 @@
 /*   By: kgezgin <kgezgin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 16:40:33 by kgezgin           #+#    #+#             */
-/*   Updated: 2023/01/12 11:41:33 by kgezgin          ###   ########.fr       */
+/*   Updated: 2023/01/23 11:30:54 by kgezgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,10 @@ void	ft_move2(t_data_box *data, int d, int x, int y)
 
 int	check_exit(t_data_box *data, int y, int x)
 {
-	if (data->ma->map[y + 1][x] == 'X' || data->ma->map[y - 1][x] == 'X'
-		|| data->ma->map[y][x + 1] == 'X'
-		|| data->ma->map[y][x - 1] == 'X')
+	if (data->ma->copy[y + 1][x] == 'X'
+		|| data->ma->copy[y - 1][x] == 'X'
+		|| data->ma->copy[y][x + 1] == 'X'
+		|| data->ma->copy[y][x - 1] == 'X')
 		return (1);
 	return (0);
 }
@@ -110,6 +111,6 @@ int	ft_check(t_data_box *data)
 		y++;
 	}
 	if (e == 0 && c == 0)
-		return (1);
-	return (0);
+		return (0);
+	return (1);
 }
