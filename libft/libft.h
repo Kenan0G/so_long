@@ -6,11 +6,7 @@
 /*   By: kgezgin <kgezgin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 14:00:37 by kgezgin           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/01/23 09:31:42 by kgezgin          ###   ########.fr       */
-=======
-/*   Updated: 2022/12/30 14:28:50 by kgezgin          ###   ########.fr       */
->>>>>>> 51718cd (first_try)
+/*   Updated: 2023/01/23 12:13:52 by kgezgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +69,4 @@ void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 char	*ft_strchr_v2(char *s, int c);
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 51718cd (first_try)
 #endif
